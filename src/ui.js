@@ -53,10 +53,10 @@ const autolinkRe = /\[([^\s\]]+)\](?!\()/g;
             m[1] = doc.data.title
           }
           if (doc.data.summary) {
-            summary = u('<div class="summary">').html(beaker.markdown.toHTML(doc.data.summary))
+            summary = u('<div class="summary">').html(doc.data.summary)
           }
         }
-        str = beaker.markdown.toHTML(doc.content)
+        str = doc.content
 
         // Asynchronously build embeds and auto-links.
         let match, idCache = {}
@@ -67,23 +67,24 @@ const autolinkRe = /\[([^\s\]]+)\](?!\()/g;
           }
 
           let m = id.split('.')
-          let fname = `/${m[0]}.md`
           let mstat = null, val = null
+          let fname = `/${m[0]}.md`
           try { mstat = await beaker.hyperdrive.stat(fname) } catch {}
+          if (!mstat) {
+            fname = `/${m[0]}`
+            try { mstat = await beaker.hyperdrive.stat(fname) } catch {}
+          }
 
           if (m.length === 1) {
             if (mstat) {
-              let title = mstat.data.title || id
-              val = `<a href="/${id}.md">${title}</a>`
+              let title = (mstat.data && mstat.data.title) || id
+              val = `[${title}](${fname})`
             }
           } else if (mstat) {
             val = mstat.metadata[m[1]]
             if (!val) {
               let embed = matter(await beaker.hyperdrive.readFile(fname))
               val = embed.data[m[1]]
-            }
-            if (val) {
-              val = beaker.markdown.toHTML(val)
             }
           }
 
@@ -92,6 +93,7 @@ const autolinkRe = /\[([^\s\]]+)\](?!\()/g;
 
         // Okay, swap all embed and auto-links into place.
         str = str.replace(autolinkRe, id => idCache[id.slice(1, -1)] || id)
+        str = beaker.markdown.toHTML(str)
       }
     }
 
