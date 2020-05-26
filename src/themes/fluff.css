@@ -1,0 +1,32 @@
+body {
+  background-color: #55f;
+}
+
+div.page {
+  border: solid 1px black;
+  background: #ffe;
+}
+
+header > h1 {
+  background: #f55;
+  color: white;
+  border-bottom: solid 1px black;
+}
+
+div.tag {
+  color: #55f;
+  background-color: white;
+}
+
+main blockquote {
+  margin-left: -50px;
+  margin-right: 0px;
+  padding: 0 20px;
+  border: solid 1px #533;
+  background-color: #eff;
+}
+
+footer {
+  background: #5fa;
+  border-top: solid 1px black;
+}
