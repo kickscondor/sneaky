@@ -17,14 +17,52 @@ header > h1 {
   padding: 6px 20px;
 }
 
+h1 > a.merge {
+  float: left;
+  display: block;
+  font-size: 0.7rem;
+  padding: 4px;
+  margin: 2px 12px 0 0;
+  background: yellow;
+  border-radius: 6px;
+  text-decoration: none;
+  color: red;
+}
+
+h1 span.icon {
+  float: left;
+  display: block;
+  font-size: 1.3rem;
+  margin-right: 6px;
+}
+
 div.meta {
   float: right;
   margin: 10px 20px;
 }
 
 div.tag {
-  font-weight: bold;
   font-size: 1rem;
+}
+
+a.template {
+  display: block;
+  text-decoration: none;
+}
+
+a.template:link {
+  background: crimson;
+  color: white;
+}
+
+a.template:hover {
+  background: white;
+  color: black;
+}
+
+div.tag,
+a.template {
+  font-weight: bold;
   float: right;
   padding: 1px 10px;
   border-radius: 20px;
@@ -33,6 +71,10 @@ div.tag {
 
 main {
   margin: 6px 20px;
+}
+
+main img {
+  max-width: 100%;
 }
 
 div.summary {
@@ -45,6 +87,22 @@ footer {
   font-weight: normal;
   font-size: 0.7rem;
   padding: 6px 20px;
+}
+
+a[href^='/.ui/'] {
+  display: block;
+  text-decoration: none;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 240px;
+  border-radius: 32px;
+  padding: 20px;
+  background: #ddf;
+}
+
+a[href^='/.ui/']:hover {
+  color: white;
+  background: black;
 }
 
 /* concert one */
